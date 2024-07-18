@@ -12,8 +12,28 @@ const Quiz = new QuizService(quizRepository)
 const controller = new quizController(Question,Quiz)
 
 router.get('/', (req: Request, res: Response) => {
-  console.log("server okay ")
-  res.send('Welcome to the Home Page');
+  const response = {
+    "/quiz/create": {
+      "method":"post",
+      "body":{
+        "name": "string",
+        "status": "boolean"
+      }
+    },
+    "/quiz/:id/questions": {
+      "method":"post",
+      "body":{
+        "question": "string",
+        "options": "string[]",
+        "correct_option": "string",
+      }
+    },
+    "/quiz/:id":{
+      "method":"get",
+    }
+
+  }
+  res.send(response);
 });
 router.get("/quiz/:id", controller.onQuizFindWithQuestion.bind(controller))
 router.post("/quiz/:id/questions", controller.onCreatquestion.bind(controller))
