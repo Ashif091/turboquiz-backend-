@@ -2,11 +2,12 @@ import express, { Application } from 'express';
 import quizRoute from './presentation/routes/quizRoutes';
 import { connectToDatabase } from "./database/connection-config";
 import { errorHandler } from './presentation/middleware/errorHandler';
+const cors = require('cors');
 import dotenv from "dotenv";
 dotenv.config();  
 
 const app: Application = express();
-
+app.use(cors());
 // Middleware
 app.use(express.json()); 
 
