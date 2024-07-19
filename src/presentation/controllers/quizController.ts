@@ -51,4 +51,12 @@ export class quizController {
       next(error)
     }
   }
+  async onQuizList(req:Request , res:Response,next:NextFunction){
+    try {
+      const allData = await this.quizService.quizList()
+      return res.json(allData)
+    } catch (error) {
+      next(error)
+    }
+  }
 }

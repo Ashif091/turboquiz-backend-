@@ -13,6 +13,9 @@ const controller = new quizController(Question,Quiz)
 
 router.get('/', (req: Request, res: Response) => {
   const response = {
+    "/quiz": {
+      "method":"get"
+    },
     "/quiz/create": {
       "method":"post",
       "body":{
@@ -35,6 +38,7 @@ router.get('/', (req: Request, res: Response) => {
   }
   res.send(response);
 });
+router.get("/quiz", controller.onQuizList.bind(controller))
 router.get("/quiz/:id", controller.onQuizFindWithQuestion.bind(controller))
 router.post("/quiz/:id/questions", controller.onCreatquestion.bind(controller))
 router.post("/quiz/create", controller.onCreatquiz.bind(controller)) 

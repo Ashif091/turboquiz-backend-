@@ -12,10 +12,12 @@ export class QuizRepository implements IQuizRepository {
     }
     return newQuiz
   }
+  async find():Promise<Quiz[]|[]>{
+    const newQuiz = await QuizModel.find()
+    return newQuiz
+  }
   async findById(id: string): Promise<Quiz | null> {
-    console.log("_______________")
     const Quiz = await QuizModel.findOne({_id: id})
-    console.log("_______________"+Quiz)
 
     if (Quiz) {
       const QuizData: Quiz = {
