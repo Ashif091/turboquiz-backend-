@@ -36,6 +36,9 @@ router.get('/', (req: Request, res: Response) => {
     },
     "/quiz/id":{
       "method":"Delete",
+    },
+    "/quiz/:id/:Q_id":{
+      "method":"Delete",
     }
 
   }
