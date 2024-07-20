@@ -16,8 +16,13 @@ export class QuizService implements IQuizService {
         const Quiz = await this.repository.findById(id)
         return Quiz
     }
+    async deleteById(id:string):Promise<Quiz|null>{
+        const Quiz = await this.repository.findByIdAndDelete(id)
+        return Quiz
+    }
     async quizList(){
         const allQuiz = await this.repository.find()
         return allQuiz
     }
+
 }

@@ -33,6 +33,9 @@ router.get('/', (req: Request, res: Response) => {
     },
     "/quiz/:id":{
       "method":"get",
+    },
+    "/quiz/id":{
+      "method":"Delete",
     }
 
   }
@@ -40,6 +43,7 @@ router.get('/', (req: Request, res: Response) => {
 });
 router.get("/quiz", controller.onQuizList.bind(controller))
 router.get("/quiz/:id", controller.onQuizFindWithQuestion.bind(controller))
+router.delete("/quiz/:id", controller.onDeleteQuiz.bind(controller))
 router.post("/quiz/:id/questions", controller.onCreatquestion.bind(controller))
 router.post("/quiz/create", controller.onCreatquiz.bind(controller)) 
 

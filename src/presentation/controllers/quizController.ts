@@ -59,4 +59,13 @@ export class quizController {
       next(error)
     }
   }
+  async onDeleteQuiz(req:Request , res:Response,next:NextFunction){
+    try {
+      const id = req.params.id
+      const allData = await this.quizService.deleteById(id)
+      return res.json(allData)
+    } catch (error) {
+      next(error)
+    }
+  }
 }

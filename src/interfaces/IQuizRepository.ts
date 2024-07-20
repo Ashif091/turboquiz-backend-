@@ -4,4 +4,5 @@ export interface IQuizRepository {
   create(data: Quiz): Promise<Quiz>;
   findById(id:String):Promise<Quiz|null>;
   find():Promise<Quiz[]|[]>
+  findByIdAndDelete(id:String): Promise<any>;
 }

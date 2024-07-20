@@ -28,4 +28,15 @@ export class QuizRepository implements IQuizRepository {
     }
     return null
   }
+  async findByIdAndDelete(id: string): Promise<any> {
+    const Quiz = await QuizModel.findByIdAndDelete({_id: id})
+    if (Quiz) {
+      const QuizData: Quiz = {
+        name: Quiz.name,
+        status: Quiz.status,
+      }
+      return Quiz
+    }
+    return null
+  }
 }

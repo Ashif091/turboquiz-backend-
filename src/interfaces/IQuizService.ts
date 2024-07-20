@@ -4,4 +4,5 @@ export interface IQuizService {
     createQuiz(data:Quiz):Promise<Quiz>,
     quizFindById(id:String):Promise<Quiz|null>
     quizList():Promise<Quiz[]|[]>
+    deleteById(id:String):Promise<Quiz|null>
 }
