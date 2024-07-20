@@ -16,4 +16,11 @@ export class QuestionService implements IQuestionService {
         const Questions = await this.repository.findByField({quiz_id:id})
         return Questions
     }
+    async deleteQuestionById(id: string){
+        console.log(id+"data I")
+
+        const Questions = await this.repository.findByIdAndDelete(id)
+        console.log(Questions+"data I")
+        return Questions
+    }
 }

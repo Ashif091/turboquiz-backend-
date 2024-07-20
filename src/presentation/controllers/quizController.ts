@@ -17,7 +17,8 @@ export class quizController {
       const body = req.body
       body.quiz_id = new Types.ObjectId(req.params.id) 
       const data = await this.questionService.createQuestion(body)
-      return res.json(data)
+      const allQuestions = await this.questionService.findQuestionByQuizId(req.params.id)
+      return res.json(allQuestions)
     } catch (error) {
       console.log(error) 
       next(error)
@@ -27,7 +28,8 @@ export class quizController {
     try {
       const body: Quiz = req.body
       const data = await this.quizService.createQuiz(body)
-      return res.json(data)
+      const allQuiz = await this.quizService.quizList()
+      return res.json(allQuiz)
     } catch (error) {
       next(error)
     }
@@ -63,7 +65,19 @@ export class quizController {
     try {
       const id = req.params.id
       const allData = await this.quizService.deleteById(id)
-      return res.json(allData)
+      const allQuiz = await this.quizService.quizList()
+      return res.json(allQuiz)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async onDeleteQuesion(req:Request , res:Response,next:NextFunction){
+    try {
+      const Q_id = req.params.Q_id
+      const id = req.params.id
+      const allData = await this.questionService.deleteQuestionById(Q_id)
+      const allQuestions = await this.questionService.findQuestionByQuizId(id)
+      return res.json(allQuestions)
     } catch (error) {
       next(error)
     }

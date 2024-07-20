@@ -20,4 +20,11 @@ export class QuestionRepository implements IQuestionRepository {
         const data = await QuestionModel.find(obj)
         return data
     }
+    async findByIdAndDelete(id: string): Promise<any> {
+        const Question = await QuestionModel.findByIdAndDelete({_id: id})
+        if (Question) {
+          return Question
+        }
+        return null
+      }
 }

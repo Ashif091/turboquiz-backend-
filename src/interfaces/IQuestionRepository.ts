@@ -5,4 +5,5 @@ type QueryObject = {
 export interface IQuestionRepository {
   create(data: Question): Promise<Question>;
   findByField(obj:QueryObject):Promise<Question[]>;
+  findByIdAndDelete(id:string):Promise<Question>
 }
