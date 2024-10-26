@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #e0e0e0;
+      background-color: #1a1a1a;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #bb86fc;
+    }
+
+    .endpoint {
+      background-color: #2d2d2d;
+      border-left: 4px solid #03dac6;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .method {
+      font-weight: bold;
+      color: #cf6679;
+    }
+
+    .url {
+      color: #03dac6;
+    }
+
+    .params,
+    .body {
+      margin-left: 20px;
+    }
+
+    .schema {
+      background-color: #333333;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    code,
+    pre {
+      background-color: #333333;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    pre {
+      padding: 10px;
+      overflow-x: auto;
+    }
+
+    a {
+      color: #bb86fc;
+    }
+
+    a:hover {
+      color: #03dac6;
+    }
+    .highlight {
+            background-color: #4a4a4a;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+  </style>
+</head>
+
+<body>
+  <h1>Quiz API Documentation</h1>
+  <p>This API allows users to create quizzes, add questions to quizzes, retrieve quiz data, and manage quizzes and
+    questions.</p>
+    <div class="highlight">
+      <h3>Key Feature</h3>
+      <p>When adding, updating, or deleting quizzes or questions, the API returns the updated data. This makes it easy for frontend applications to update their state without additional API calls.</p>
+  </div>
+  <h2>Base URL</h2>
+  <p><code>http://turboquizapi.onrender.com</code></p>
+
+  <h2>Endpoints</h2>
+
+  <div class="endpoint">
+    <h3><span class="method">GET</span> <span class="url">/quiz</span></h3>
+    <p>Retrieve a list of all quizzes.</p>
+    <h4>Response</h4>
+    <pre><code>
+[
+  {
+    "id": "string",
+    "name": "string",
+    "status": boolean
+  },
+  ...
+]
+        </code></pre>
+  </div>
+
+  <div class="endpoint">
+    <h3><span class="method">POST</span> <span class="url">/quiz/create</span></h3>
+    <p>Create a new quiz.</p>
+    <h4>Request Body</h4>
+    <pre><code>
+{
+  "name": "string",
+  "status": boolean
+}
+        </code></pre>
+    <h4>Response will be Array</h4>
+    <pre><code>
+    [
+      {
+        "_id":"string" ,
+        "name": "string",
+        "status": boolean,
+        "createdAt": date,
+        "updatedAt": date,
+      },
+      ...
+    ]
+        </code></pre>
+  </div>
+
+  <div class="endpoint">
+    <h3><span class="method">POST</span> <span class="url">/quiz/:id/questions</span></h3>
+    <p>Add a question to a specific quiz.</p>
+    <h4>Parameters</h4>
+    <p class="params"><code>id</code>: The ID of the quiz (string)</p>
+    <h4>Request Body</h4>
+    <pre><code>
+{
+  "question": "string",
+  "options": ["string", "string", "string", "string"],
+  "correct_option": "string"
+}
+        </code></pre>
+    <h4>Response will be Array of Question</h4>
+    <pre><code>
+    [
+      {
+        "id": "string",
+        "name": "string",
+        "status": boolean,
+        "options": [
+          "string",
+          "string",
+          "string",
+          "string"
+        ],
+        "correct_option": "string",
+        "createdAt": date,
+        "updatedAt": date,
+      },
+      ...
+    ]
+        </code></pre>
+  </div>
+
+  <div class="endpoint">
+    <h3><span class="method">GET</span> <span class="url">/quiz/:id</span></h3>
+    <p>Retrieve a specific quiz with its questions.</p>
+    <h4>Parameters</h4>
+    <p class="params"><code>id</code>: The ID of the quiz (string)</p>
+    <h4>Response</h4>
+    <pre><code>
+    [
+      {
+        "id": "string",
+        "name": "string",
+        "status": boolean,
+        "options": [
+          "string",
+          "string",
+          "string",
+          "string"
+        ],
+        "correct_option": "string",
+        "createdAt": date,
+        "updatedAt": date,
+      },
+      ...
+    ]
+        </code></pre>
+  </div>
+
+  <div class="endpoint">
+    <h3><span class="method">DELETE</span> <span class="url">/quiz/:id</span></h3>
+    <p>Delete a specific quiz and all its associated questions.</p>
+    <h4>Parameters</h4>
+    <p class="params"><code>id</code>: The ID of the quiz (string)</p>
+    <h4>Response</h4>
+    <pre><code>
+    [
+      {
+        "_id":"string" ,
+        "name": "string",
+        "status": boolean,
+        "createdAt": date,
+        "updatedAt": date,
+      },
+      ...
+    ]
+        </code></pre>
+  </div>
+
+  <div class="endpoint">
+    <h3><span class="method">DELETE</span> <span class="url">/quiz/:id/:Q_id</span></h3>
+    <p>Delete a specific question from a quiz.</p>
+    <h4>Parameters</h4>
+    <p class="params"><code>id</code>: The ID of the quiz (string)</p>
+    <p class="params"><code>Q_id</code>: The ID of the question (string)</p>
+    <h4>Response</h4>
+    <pre><code>
+    [
+      {
+        "id": "string",
+        "name": "string",
+        "status": boolean,
+        "options": [
+          "string",
+          "string",
+          "string",
+          "string"
+        ],
+        "correct_option": "string",
+        "createdAt": date,
+        "updatedAt": date,
+      },
+      ...
+    ]
+        </code></pre>
+  </div>
+
+  <h2>Data Models</h2>
+
+  <h3>Quiz Schema</h3>
+  <pre class="schema"><code>
+{
+  name: { type: String, required: true },
+  status: { type: Boolean, required: true, default: true },
+  timestamps: true
+}
+    </code></pre>
+
+  <h3>Question Schema</h3>
+  <pre class="schema"><code>
+{
+  quiz_id: { type: Schema.Types.ObjectId, required: true, ref: 'Quiz' },
+  question: { type: String, required: true },
+  options: {
+    type: [String],
+    required: true,
+    validate: {
+      validator: function (v: string[]) {
+        return v.length === 4;
+      },
+      message: 'Options array must have exactly 4 elements',
+    },
+  },
+  correct_option: { type: String, required: true },
+  timestamps: true
+}
+    </code></pre>
+
+  <h2>Notes</h2>
+  <ul>
+    <li>All requests should include appropriate headers (e.g., Content-Type: application/json).</li>
+    <li>Authentication may be required for certain endpoints (not specified in the provided information).</li>
+    <li>Error responses will include appropriate HTTP status codes and error messages.</li>
+  </ul>
+</body>
+
+</html>
